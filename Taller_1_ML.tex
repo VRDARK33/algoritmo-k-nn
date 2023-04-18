@@ -1,0 +1,318 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[spanish]{babel} %Castellanización
+\usepackage[T1]{fontenc} %escribe lo del teclado
+\usepackage[utf8]{inputenc} %Reconoce algunos símbolos
+\usepackage{lmodern} %optimiza algunas fuentes
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{hyperref} % Uso de links
+\usepackage[most]{tcolorbox}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Pregunta]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solución]}{\end{proof}} %It just adds Proof in italics at the beginning of the text given as argument and a white square (Q.E.D. symbol, also known as a tombstone) at the end of it.
+\renewcommand{\qedsymbol}{} % To hide the Q.E.D. symbol altogether, redefine it to be blank:
+
+
+
+
+
+
+%--------------------PARAMETRIZA APARIENCIA DE CODIGO FUENTE ------------------------------------
+\usepackage{listings}
+\usepackage{xcolor}
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=true,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+%------------------------------------------------------------------------------------------------
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    %filecolor=blue,      
+    urlcolor=blue,
+}
+ 
+ 
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Conceptos Fundamentales en Técnicas de Aprendizaje de Máquina}
+\author{Nombre brayan andres sanchez perez\\
+Nombre daniel rico palacio \\
+Docente: Alejandro Rodas Vásquez\\
+Universidad Tecnológica de Pereira}
+
+\maketitle
+
+
+
+\section*{Introducción}
+El \textit{Aprendizaje de Máquina} es un subcampo en la Inteligencia Artificial cuyo propósito es permitir que las ``\textit{máquinas aprendan}'' a través de datos de modo que puedan construir e identificar patrones que permitan resolver problemas.\\
+
+En la práctica, llamamos \textit{modelo} a un conjunto de reglas que un algoritmo de aprendizaje automático aprende. Una vez que se ha aprendido el \textit{modelo}, podemos darle nuevas observaciones y este generará sus predicciones para los nuevos datos. Nos referimos a estos como modelos porque \textit{representan fenómenos del mundo real} de una manera lo suficientemente simplista como para que nosotros y la computadora podamos interpretarlos y comprenderlos. El proceso mediante el cual se aprende el modelo se denomina \textit{algoritmo}.\\
+
+Los científicos de datos generalmente eligen algunos algoritmos que saben que tienden a funcionar bien para el tipo de dato y el problema en el que están trabajando, y determinan qué algoritmo genera el \textit{modelo de mejor rendimiento}. Sin embargo, podemos reducir nuestra elección inicial dividiendo los algoritmos de aprendizaje automático en categorías, según la función que realizan y cómo la realizan.\\
+
+Los algoritmos de aprendizaje automático se pueden clasificar según su tipo de aprendizaje y la tarea que realizan. Hay tres tipos de aprendizaje:
+
+
+\begin{itemize}
+\item Supervisado
+\item Sin supervisión
+\item Semi-supervisado
+\end{itemize}
+
+
+
+El tipo depende de cómo aprenden los algoritmos. ¿Requieren que los tomemos de la mano durante el proceso de aprendizaje? ¿O aprenden las respuestas por sí mismos? Los algoritmos \textit{supervisados} y \textit{no supervisados} se pueden dividir en dos clases cada uno:
+
+\begin{itemize}
+    \item Supervisado
+    \begin{itemize}
+        \item clasificacion
+        \item regresión
+    \end{itemize}
+    \item Sin supervisión
+    \begin{itemize}
+        \item Reducción de dimensión
+        \item Agrupación
+    \end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+\section*{Supervisado}
+Definir ¿qué es o qué son los algoritmos supervisados?
+
+Los algoritmos supervisados son un tipo de algoritmos de aprendizaje automático que se utilizan para 
+predecir una salida o resultado específico basado en un conjunto de entradas conocidas y etiquetadas previamente. 
+Estos algoritmos se denominan supervisados porque el modelo de aprendizaje se "entrena" con un conjunto de datos 
+de entrada y salida previamente etiquetados, y luego se utiliza para predecir la salida de nuevos datos de entrada.
+
+En otras palabras, en un algoritmo supervisado, el modelo de aprendizaje automático recibe un conjunto de datos
+etiquetados (también conocido como conjunto de entrenamiento) que se utiliza para "entrenar" 
+el modelo y ajustar los parámetros de manera que se minimice el error en la predicción de los resultados. 
+Una vez entrenado el modelo, se puede utilizar para predecir el resultado para nuevos datos de entrada que 
+no se han utilizado durante el entrenamiento.
+
+Los algoritmos supervisados se utilizan en una variedad de aplicaciones de aprendizaje automático, 
+incluyendo la clasificación de imágenes, la detección de spam en correos electrónicos, la predicción de precios 
+de acciones, la identificación de fraudes en tarjetas de crédito, y muchos otros.
+
+\subsection*{Clasificación}
+
+Definir ¿qué es o qué son los algoritmos de Clasificación?
+
+Los algoritmos de clasificación son técnicas utilizadas en la minería de datos y el aprendizaje automático
+para clasificar datos en diferentes categorías o grupos. Estos algoritmos utilizan datos históricos para aprender
+patrones y características que les permiten identificar y clasificar nuevos datos de manera eficiente.
+
+En términos generales, los algoritmos de clasificación se pueden dividir en dos tipos: supervisados y no supervisados.
+Los algoritmos supervisados utilizan un conjunto de datos de entrenamiento etiquetado previamente para aprender y construir
+un modelo que pueda clasificar nuevos datos. Por otro lado, los algoritmos no supervisados no requieren datos de entrenamiento 
+etiquetados previamente y utilizan técnicas de agrupamiento y segmentación para clasificar los datos.
+
+\subsubsection*{k-nearest neighbors}
+
+Explicar el concepto que encierra el algoritmo.
+
+El algoritmo de k-Nearest Neighbors (k-NN) es un método de clasificación supervisado en el aprendizaje automático
+que se utiliza para clasificar un punto de datos desconocido en función de la mayoría de los k puntos de datos más
+cercanos a él en un conjunto de datos de entrenamiento.
+
+El proceso del algoritmo k-NN comienza con el conjunto de datos de entrenamiento, que consiste en pares de datos
+etiquetados con su clase correspondiente. Luego, cuando se recibe un nuevo punto de datos sin etiquetar, el algoritmo
+encuentra los k puntos de datos más cercanos al punto de datos desconocido en función de alguna medida de distancia
+(por ejemplo, la distancia euclidiana). Los k vecinos más cercanos se seleccionan en función de su distancia al punto
+de datos desconocido, y se les asigna una etiqueta de clase.
+
+Finalmente, el punto de datos desconocido se clasifica en la clase que es más común entre los k vecinos más cercanos.
+En caso de empate, se puede utilizar alguna regla para desempatar, como seleccionar la clase más cercana al punto
+de datos desconocido.
+
+El algoritmo k-NN es fácil de implementar y es útil para clasificar datos en conjuntos de datos pequeños.
+Sin embargo, puede ser computacionalmente costoso y su rendimiento puede verse afectado por la elección del valor
+de k y la medida de distancia utilizada. Además, el algoritmo no es adecuado para conjuntos de datos con muchas
+dimensiones, ya que la distancia entre los puntos se vuelve menos significativa a medida que aumenta el número de
+dimensiones.
+
+\subsubsection*{Naive Bayes}
+
+Explicar el concepto que encierra el algoritmo.
+
+El algoritmo Naive Bayes es un modelo de aprendizaje automático utilizado en la clasificación y predicción de datos.
+Se basa en el teorema de Bayes y asume que la presencia de una característica en una clase no está relacionada con
+la presencia o ausencia de otras características.
+
+En otras palabras, el algoritmo Naive Bayes considera cada característica de un conjunto de datos de manera
+independiente, lo que lo hace "ingenuo" o "naive". Por ejemplo, si se utiliza el algoritmo Naive Bayes para clasificar
+correos electrónicos como "spam" o "no spam", el algoritmo considerará cada palabra en el correo electrónico como
+una característica independiente y no tendrá en cuenta su relación con otras palabras.
+
+El algoritmo Naive Bayes utiliza una combinación de probabilidades condicionales y el teorema de Bayes para
+determinar la probabilidad de que un punto de datos pertenezca a una clase determinada. En términos
+simples, el algoritmo calcula la probabilidad de que un punto de datos pertenezca a cada clase y selecciona
+la clase con la mayor probabilidad como la predicción final.
+
+Una de las ventajas del algoritmo Naive Bayes es que es rápido y eficiente en términos computacionales.
+También es muy útil en conjuntos de datos con muchas características. Sin embargo, una de las limitaciones
+del algoritmo es que puede tener problemas con características correlacionadas o dependientes.
+
+\subsubsection*{Support Vector Machines}
+
+Explicar el concepto que encierra el algoritmo.
+
+Las máquinas de vectores de soporte (SVM, por sus siglas en inglés) son un algoritmo de aprendizaje supervisado
+utilizado para clasificación y regresión. La idea principal de SVM es encontrar el hiperplano que mejor
+divide o clasifica los datos en dos o más clases.
+
+Un hiperplano es una superficie que separa el espacio en dos partes. En el caso de la clasificación, el objetivo
+es encontrar un hiperplano que separe las muestras de datos de diferentes clases. Por lo tanto, SVM busca encontrar
+el hiperplano óptimo que maximiza la distancia entre las muestras más cercanas de las diferentes clases.
+Estas muestras se denominan vectores de soporte.
+
+Para el caso de la regresión, la idea es encontrar el hiperplano que mejor se ajuste a los datos de entrenamiento.
+La diferencia con la clasificación es que, en lugar de separar los datos en diferentes clases, SVM busca encontrar
+el hiperplano que minimiza la distancia entre los datos de entrenamiento y el hiperplano.
+
+En resumen, SVM es un algoritmo de aprendizaje supervisado que busca encontrar el mejor hiperplano para separar
+o ajustar los datos de entrenamiento en dos o más clases. SVM es útil en problemas de clasificación y regresión,
+especialmente cuando hay un número limitado de muestras de entrenamiento y un gran número de características.
+
+\subsubsection*{Decision Trees}
+
+Explicar el concepto que encierra el algoritmo.
+
+Un árbol de decisión es un algoritmo de aprendizaje automático que se utiliza para modelar problemas de clasificación
+o regresión. El árbol representa un conjunto de decisiones que se toman en función de ciertas condiciones
+o atributos, que conducen a diferentes resultados o acciones.
+
+En términos simples, un árbol de decisión es un diagrama de flujo en el que cada nodo interno representa una pregunta
+o prueba sobre un atributo, y cada rama representa una posible respuesta a esa pregunta. 
+Cada hoja del árbol representa una etiqueta de clasificación o un valor de regresión.
+
+El proceso de construcción del árbol implica seleccionar el mejor atributo para dividir el conjunto de datos
+en dos o más subconjuntos, de manera que los subconjuntos resultantes sean más homogéneos en términos de su clase
+o valor objetivo. Este proceso se repite recursivamente para cada subconjunto, hasta que se alcanza una condición
+de parada, como por ejemplo un nivel máximo de profundidad o un número mínimo de instancias por hoja.
+
+Una vez construido el árbol, se puede utilizar para predecir la clase o valor objetivo de nuevas instancias, siguiendo
+el camino correspondiente desde la raíz hasta una hoja. El árbol de decisión es una técnica simple pero poderosa
+que puede ser fácilmente interpretada y explicada, lo que lo convierte en una herramienta útil en muchas aplicaciones
+de aprendizaje automático.
+
+\subsubsection*{Random Forests}
+
+Explicar el concepto que encierra el algoritmo.
+
+Random Forest es un algoritmo de aprendizaje supervisado utilizado en problemas de clasificación y regresión.
+Se basa en la creación de múltiples árboles de decisión y la combinación de sus resultados para obtener una predicción
+más precisa y robusta.
+
+Cada árbol de decisión en un Random Forest se construye utilizando un subconjunto aleatorio de las características
+o variables disponibles en los datos de entrenamiento. Además, se utiliza un conjunto aleatorio de datos
+de entrenamiento para cada árbol. Estos dos elementos aleatorios se utilizan para reducir la correlación entre
+los árboles individuales y evitar el sobreajuste.
+
+En la fase de predicción, la mayoría de los votos de los árboles individuales se utilizan para tomar la decisión
+final en el caso de problemas de clasificación. En el caso de problemas de regresión, se utiliza la media de las
+predicciones de los árboles.
+
+El algoritmo Random Forest tiene varias ventajas, como su capacidad para manejar conjuntos de datos grandes
+y complejos, su capacidad para manejar datos faltantes y ruido en los datos, y su capacidad para manejar tanto
+problemas de clasificación como de regresión. Además, es fácil de entender y interpretar los resultados.
+
+En resumen, Random Forest es un algoritmo de aprendizaje supervisado que combina múltiples árboles de decisión
+para obtener una predicción más precisa y robusta. Utiliza elementos aleatorios para reducir la correlación
+entre los árboles y evitar el sobreajuste. Es una técnica poderosa y versátil para abordar una amplia gama
+de problemas de aprendizaje automático.
+
+\section*{Implementación de Modelo}
+
+\begin{enumerate}
+    \item \textit{Seleccionar alguno de los algoritmos propuestos} y
+    \item plantear un ejercicio relacionado (utilizando \textit{Tensorflow} o \textit{Pytorch}) con este
+    \item explicar cada paso o fase del ejercicio
+\end{enumerate}
+
+
+
+
+
+\section*{Presentación}
+
+Usted debe de realizar una presentación ante el grupo donde exponga el trabajo que ha realizado.
+
+
+
+
+\section*{Bibliografía}
+
+Para la bibliografía solo se aceptaran referencias a \textbf{libros} o \textbf{artículos}. Para esto se utilizará el siguiente formato
+
+\begin{enumerate}
+    \item Nombre del Libro/Articulo - Autor del Libro/Articulo - (Si es el caso URL donde descargó el Libro/Articulo) 
+    
+    \item Nombre del Libro/Articulo - Autor del Libro/Articulo - (Si es el caso URL donde descargó el Libro/Articulo) 
+\end{enumerate}
+
+\end{document}
